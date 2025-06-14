@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vehicle Service Appointment</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f0f2f5;
+    }
+    form {
+      max-width: 500px;
+      background: white;
+      padding: 20px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    select, input[type="date"], input[type="submit"], input[type="text"], input[type="tel"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    #appointments {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align:center;">Book Vehicle Service Appointment</h2>
+
+  <form id="appointmentForm">
+    <label for="name">Customer Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="mobile">Mobile Number:</label>
+    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="10-digit number" required>
+
+    <label for="vehicle">Vehicle Number:</label>
+    <input type="text" id="vehicle" name="vehicle" placeholder="e.g. MH12AB1234" required>
+
+    <label for="date">Select Date:</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="service">Service Type:</label>
+    <select id="service" name="service" required>
+      <option value="">--Select--</option>
+      <option value="01 Free">01 Free</option>
+      <option value="02 Free">02 Free</option>
+      <option value="03 Free">03 Free</option>
+      <option value="Paid">Paid</option>
+      <option value="General Check-Up">General Check-Up</option>
+    </select>
+
+    <label for="timeslot">Time Slot:</label>
+    <select id="timeslot" name="timeslot" required>
+      <option value="">--Select--</option>
+      <option value="08:00 AM - 09:00 AM">08:00 AM - 09:00 AM</option>
+      <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+      <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+      <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+      <option value="12:00 PM - 01:00 PM">12:00 PM - 01:00 PM</option>
+      <option value="01:00 PM - 02:00 PM">01:00 PM - 02:00 PM</option>
+      <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+      <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
+      <option value="04:00 PM - 05:00 PM">04:00 PM - 05:00 PM</option>
+      <option value="05:00 PM - 06:00 PM">05:00 PM - 06:00 PM</option>
+    </select>
+
+    <input type="submit" value="Book Appointment">
+  </form>
+
+  <div id="appointments">
+    <h3>Appointment List:</h3>
+    <table id="appointmentTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>Vehicle No</th>
+          <th>Date</th>
+          <th>Service Type</th>
+          <th>Time Slot</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Appointment rows will go here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const mobile = document.getElementById("mobile").value;
+      const vehicle = document.getElementById("vehicle").value;
+      const date = document.getElementById("date").value;
+      const service = document.getElementById("service").value;
+      const timeslot = document.getElementById("timeslot").value;
+
+      const table = document.getElementById("appointmentTable").getElementsByTagName('tbody')[0];
+      const newRow = table.insertRow();
+      newRow.innerHTML = `
+        <td>${name}</td>
+        <td>${mobile}</td>
+        <td>${vehicle}</td>
+        <td>${date}</td>
+        <td>${service}</td>
+        <td>${timeslot}</td>
+      `;
+
+      // Reset the form
+      document.getElementById("appointmentForm").reset();
+    });
+  </script>
+
+</body>
+</html>
+    
